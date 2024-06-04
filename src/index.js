@@ -1,5 +1,8 @@
-// src/index.js
+import { setupServer } from './server';
 
-const message = "Hello node";
+const getContacts = async () => {
+  await initMongoConnection();
+  setupServer();
+};
 
-console.log(message);
+getContacts();
