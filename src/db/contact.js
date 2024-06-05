@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-const contactsShema = new Schema()(
+const contactsShema = new Schema(
   {
     name: {
       type: String,

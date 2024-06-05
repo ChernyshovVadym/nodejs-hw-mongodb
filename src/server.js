@@ -3,10 +3,10 @@ import pino from 'pino-http';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import { env } from './utils/env.js';
-import { ENV_VARS } from './constants/constans.js';
+// import { ENV_VARS } from './db/initMongoConnection.js';
 import { getAllContacts, getContactById } from './services/contacts.js';
 
-const PORT = env(ENV_VARS.PORT);
+const PORT = env('PORT', '3000');
 
 export const setupServer = () => {
   const app = express();
