@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
-import { getAllContacts, getContactById } from '../services/contacts';
+import {
+  getAllContacts,
+  getContactById,
+  updateContacts,
+} from '../services/contacts';
 import createHttpError from 'http-errors';
 
 export const getContactsController = async (req, res) => {
@@ -43,7 +47,7 @@ export const createContactController = async (req, res) => {
 
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
-  const patch = await dateContacts(contactId, req.body);
+  const patch = await updateContacts(contactId, req.body);
   if (!patch) {
     next(createHttpError(404, 'Not found'));
     return;
