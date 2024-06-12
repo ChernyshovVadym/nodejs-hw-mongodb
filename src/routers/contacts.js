@@ -6,7 +6,7 @@ import {
   getContactByIdController,
   getContactsController,
   patchContactController,
-} from '../controllers/contacts.js';
+} from '../controllers/constans.js';
 
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
