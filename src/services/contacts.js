@@ -18,7 +18,7 @@ export const createContact = async (payload) => {
 export const updateContacts = async (contactId, payload, options = {}) => {
   const rawPatch = await Contact.findOneAndUpdate({ _id: contactId }, payload, {
     new: true,
-    includeResultMetadana: true,
+    includePatchMetadata: true,
     ...options,
   });
   if (!rawPatch || !rawPatch.value) return null;
