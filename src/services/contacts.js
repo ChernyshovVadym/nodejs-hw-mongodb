@@ -16,15 +16,19 @@ export const createContact = async (payload) => {
 };
 
 export const updateContacts = async (contactId, payload, options = {}) => {
-  const rawPatch = await Contact.findOneAndUpdate({ _id: contactId }, payload, {
-    new: true,
-    includePatchMetadata: true,
-    ...options,
-  });
-  if (!rawPatch || !rawPatch.value) return null;
+  const rawResult = await Contact.findOneAndUpdate(
+    { _id: contactId },
+    payload,
+    {
+      new: true,
+      includeResultMetadata: true,
+      ...options,
+    },
+  );
+  if (!rawResult || !rawResult.value) return null;
   return {
-    contact: rawPatch.value,
-    isNew: Boolean(rawPatch?.lastErrorObject?.upserted),
+    contact: rawResult.value,
+    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
 };
 
