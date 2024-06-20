@@ -16,3 +16,5 @@ export const initMongoConnection = async () => {
     throw error;
   }
 };
+
+// mongodb+srv://vados:<password>@cluster0.tgbsd0r.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
