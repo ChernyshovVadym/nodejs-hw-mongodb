@@ -10,6 +10,11 @@ export const getContactById = async (contactId) => {
   return contacts;
 };
 
+export const createContact = async (payload) => {
+  const contact = await Contact.create(payload);
+  return contact;
+};
+
 export const updateContact = async (contactId, payload, options = {}) => {
   const rawResult = await Contact.findOneAndUpdate(
     { _id: contactId },

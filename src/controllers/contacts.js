@@ -1,5 +1,5 @@
 import {
-  // createContact,
+  createContact,
   deleteContact,
   // getAllContacts,
   getContactById,
@@ -10,6 +10,7 @@ import createHttpError from 'http-errors';
 
 // import { parsePaginationsParams } from '../utils/calculatePaginationData.js';
 // import { parseSortParams } from '../utils/parseSortParams.js';
+
 import mongoose from 'mongoose';
 
 // export const getContactsController = async (req, res) => {
@@ -50,14 +51,14 @@ export const getContactByIdController = async (req, res, next) => {
   });
 };
 
-// export const createContactController = async (req, res) => {
-//   const contact = await createContact(req.body);
-//   res.status(201).json({
-//     status: 201,
-//     message: 'Successfully created a contact!',
-//     data: contact,
-//   });
-// };
+export const createContactController = async (req, res) => {
+  const contact = await createContact(req.body);
+  res.status(201).json({
+    status: 201,
+    message: 'Successfully created a contact!',
+    data: contact,
+  });
+};
 
 // export const patchContactController = async (req, res, next) => {
 //   const { contactId } = req.params;

@@ -9,7 +9,7 @@ import contactRouter from './routers/contactsRouter.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
 const PORT = env('PORT', '3000');
-
+console.log(PORT);
 export const setupServer = () => {
   const app = express();
 
@@ -54,6 +54,7 @@ export const setupServer = () => {
   // });
 
   app.use('*', (req, res) => {
+    console.log('use');
     res.status(404).json({
       message: 'Not found',
     });
