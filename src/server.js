@@ -1,6 +1,7 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
+import router from './routers/index.js';
 // import mongoose from 'mongoose';
 import { env } from './utils/env.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
