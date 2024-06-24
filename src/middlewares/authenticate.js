@@ -1,6 +1,7 @@
 import createHttpError from 'http-errors';
-import { Session } from '../db/models/session/js';
+
 import { User } from '../db/models/user.js';
+import { SessionFirst } from '../db/models/session.js';
 
 export const authenticate = async (req, res, next) => {
   const authHeader = req.get('Authorization');
@@ -18,7 +19,7 @@ export const authenticate = async (req, res, next) => {
     return;
   }
 
-  const session = await Session.findOne({
+  const session = await SessionFirst.findOne({
     accessToken: token,
   });
 
