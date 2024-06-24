@@ -35,4 +35,3 @@ contactRouter.post(
 );
 
 export default contactRouter;
-contactRouter;
