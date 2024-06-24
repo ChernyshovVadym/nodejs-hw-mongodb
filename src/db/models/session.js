@@ -29,4 +29,4 @@ const sessionsSchema = new Schema(
   },
 );
 
-export const Session = model('sessions', sessionsSchema);
+export const SessionFirst = model('sessions', sessionsSchema);
