@@ -3,7 +3,7 @@ import {
   deleteContact,
   getAllContacts,
   getContactById,
-  updateContacts,
+  updateContact,
 } from '../services/contacts.js';
 
 import createHttpError from 'http-errors';
