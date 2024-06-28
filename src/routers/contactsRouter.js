@@ -15,10 +15,12 @@ import {
 } from '../validation/contacts.js';
 
 import { authenticate } from '../middlewares/authenticate.js';
+import { checkUserTokenId } from '../middlewares/checkUserTokenId.js';
 
 const contactRouter = express.Router();
 
 contactRouter.use(authenticate);
+contactRouter.use('/:contactId', checkUserTokenId);
 
 contactRouter.get('/', getContactsController);
 contactRouter.get('/:contactId', getContactByIdController);

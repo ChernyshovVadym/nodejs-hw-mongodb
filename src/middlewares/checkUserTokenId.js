@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import { Contact } from '../db/models/contact';
+import { Contact } from '../db/models/contact.js';
 
 export const checkUserTokenId = async (req, res, next) => {
   const userId = req.user._id;
