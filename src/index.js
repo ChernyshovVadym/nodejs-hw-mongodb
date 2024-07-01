@@ -2,9 +2,9 @@ import { setupServer } from './server.js';
 
 import { initMongoConnection } from './db/initMongoConnection.js';
 
-const getContacts = async () => {
+const bootstrap = async () => {
   await initMongoConnection();
   setupServer();
 };
 
-getContacts();
+bootstrap();
