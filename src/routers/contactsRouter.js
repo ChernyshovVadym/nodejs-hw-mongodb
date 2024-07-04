@@ -16,6 +16,7 @@ import {
 
 import { authenticate } from '../middlewares/authenticate.js';
 import { checkUserTokenId } from '../middlewares/checkUserTokenId.js';
+import { upload } from '../middlewares/multer.js';
 
 const contactRouter = express.Router();
 
@@ -27,11 +28,13 @@ contactRouter.get('/:contactId', getContactByIdController);
 contactRouter.delete('/:contactId', deleteContactController);
 contactRouter.patch(
   '/:contactId',
+  upload.single('avatar'),
   validateBody(updateContactSchema),
   ctrlWrapper(patchContactController),
 );
 contactRouter.post(
   '/',
+  upload.single('avatar'),
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
