@@ -13,7 +13,7 @@ import { parseSortParams } from '../utils/parseSortParams.js';
 import { parseFilterParams } from '../utils/parseFilterParams.js';
 import { env } from '../utils/env.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
-import { saveFileToUploadDir } from '../utils/createDirIfNotExists.js';
+import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 
 import mongoose from 'mongoose';
 
@@ -60,7 +60,7 @@ export const getContactByIdController = async (req, res, next) => {
 };
 
 export const createContactController = async (req, res) => {
-  const userId = req.user.id;
+  const userId = req.user._id;
   const file = req.file;
   let fileUrl;
   if (file) {
@@ -71,7 +71,7 @@ export const createContactController = async (req, res) => {
     }
   }
 
-  const contact = await createContact({ ...req.body, avatar: fileUrl }, userId);
+  const contact = await createContact({ ...req.body, avatar: fileUrl, userId });
   res.status(201).json({
     status: 201,
     message: 'Successfully created a contact!',
@@ -82,7 +82,23 @@ export const createContactController = async (req, res) => {
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const userId = req.user._id;
-  const result = await updateContact(contactId, req.body, userId);
+  const file = req.file;
+
+  let fileUrl;
+
+  if (file) {
+    if (env('ENABLE_CLOUDINARY') === 'true') {
+      fileUrl = await saveFileToCloudinary(file);
+    } else {
+      fileUrl = await saveFileToUploadDir(file);
+    }
+  }
+
+  const result = await updateContact(contactId, {
+    ...req.body,
+    avatar: fileUrl,
+    userId,
+  });
   if (!result) {
     next(createHttpError(404, 'Not found'));
     return;

@@ -1,4 +1,4 @@
-import createHttpError from 'http-errors';
+// import createHttpError from 'http-errors';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import path from 'path';
@@ -16,6 +16,7 @@ import {
 import { randomBytes } from 'crypto';
 import { env } from '../utils/env.js';
 import { sendEmail } from '../utils/sendMail.js';
+import createHttpError from 'http-errors';
 
 export const registerUser = async (payload) => {
   const user = await User.findOne({ email: payload.email });
