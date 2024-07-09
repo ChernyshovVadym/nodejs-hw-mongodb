@@ -33,7 +33,7 @@ export const registerUser = async (payload) => {
 export const loginUser = async (payload) => {
   const user = await User.findOne({ email: payload.email });
   if (!user) {
-    throw createHttpError(404, 'User not found');
+    throw createHttpError(401, 'User not found');
   }
 
   const isEqual = await bcrypt.compare(payload.password, user.password);
@@ -55,10 +55,9 @@ export const loginUser = async (payload) => {
   });
 };
 
-export const logoutUser = async ({ sessionId, refreshToken }) => {
+export const logoutUser = async ({ sessionId }) => {
   await SessionFirst.deleteOne({
     _id: sessionId,
-    refreshToken,
   });
 };
 
@@ -85,6 +84,7 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
 
   const isSessionTokenExpired =
     new Date() > new Date(session.refreshTokenValidUntil);
+
   if (isSessionTokenExpired) {
     throw createHttpError(401, 'Session token expired');
   }
