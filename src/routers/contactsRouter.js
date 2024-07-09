@@ -28,13 +28,13 @@ contactRouter.get('/:contactId', getContactByIdController);
 contactRouter.delete('/:contactId', deleteContactController);
 contactRouter.patch(
   '/:contactId',
-  upload.single('avatar'),
+  upload.single('photo'),
   validateBody(updateContactSchema),
   ctrlWrapper(patchContactController),
 );
 contactRouter.post(
   '/',
-  upload.single('avatar'),
+  upload.single('photo'),
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );

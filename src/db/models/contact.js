@@ -29,7 +29,7 @@ const contactsShema = new Schema(
       ref: 'users',
       required: true,
     },
-    avatar: {
+    photo: {
       type: String,
     },
   },
