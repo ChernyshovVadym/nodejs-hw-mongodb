@@ -1,5 +1,5 @@
 tags:
-  - Students
+  - Contact
 summary: Get student by id
 operationId: getStudent
 description: 'Get student by id'
