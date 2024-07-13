@@ -10,6 +10,7 @@ import { errorHandler } from './middlewares/errorHandler.js';
 // import { getAllContacts, getContactById } from './services/contacts.js';
 import cookieParser from 'cookie-parser';
 import { UPLOAD_DIR } from './constants/constans.js';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
 const PORT = env('PORT', '3000');
 
@@ -30,6 +31,7 @@ export const setupServer = () => {
     }),
   );
   app.use('/uploads', express.static(UPLOAD_DIR));
+  app.use('/api-docs', swaggerDocs());
 
   app.use(router);
 
