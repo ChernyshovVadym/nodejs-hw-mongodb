@@ -114,6 +114,7 @@ export const requestResetToken = async (email) => {
       expiresIn: '15m',
     },
   );
+
   const resetPasswordTemplatePath = path.join(
     TEMPLATES_DIR,
     'reset-password-email.html',
