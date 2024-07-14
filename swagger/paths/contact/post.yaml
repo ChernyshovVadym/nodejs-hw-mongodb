@@ -1,10 +1,10 @@
 #/swagger/paths/students/post.yaml
 
 tags:
-  - Students
-summary: Create student
-operationId: createStudent
-description: 'Create a student with payload'
+  - Contact
+summary: Create contact
+operationId: createContact
+description: 'Create a contact with payload'
 security:
   - bearerAuth: []
 requestBody:
