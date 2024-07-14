@@ -15,12 +15,12 @@ tags:
 servers:
   - url: https://nodejs-hw-mongodb-3-jih9.onrender.com
 paths:
-  /contacts:
+  /contact:
     get:
       $ref: ../swagger/paths/contact/get.yaml
     post:
       $ref: ../swagger/paths/contact/post.yaml
-  /contacts/{id}:
+  /contact/{id}:
     get:
       $ref: ../swagger/paths/contact/{id}/get.yaml
     patch:
