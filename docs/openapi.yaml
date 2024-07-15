@@ -13,14 +13,14 @@ tags:
   - name: Auth
     description: Auth operations.
 servers:
-  - url: https://nodejs-hw-mongodb-3-jih9.onrender.com
+  - url: https://nodejs-hw-mongodb-3-ki4o.onrender.com
 paths:
-  /contact:
+  /contacts:
     get:
       $ref: ../swagger/paths/contact/get.yaml
     post:
       $ref: ../swagger/paths/contact/post.yaml
-  /contact/{id}:
+  /contacts/{id}:
     get:
       $ref: ../swagger/paths/contact/{id}/get.yaml
     patch:
