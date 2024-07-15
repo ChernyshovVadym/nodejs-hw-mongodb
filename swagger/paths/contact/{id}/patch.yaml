@@ -1,5 +1,5 @@
 tags:
-  - Contact
+  - Contacts
 summary: Patch contact by id
 operationId: patchContact
 description: 'Patch contact by id'
@@ -17,9 +17,6 @@ requestBody:
     multipart/form-data:
       schema:
         type: object
-        required:
-          - name
-          - phoneNumber
         properties:
           name:
             description: "Contact's name"
