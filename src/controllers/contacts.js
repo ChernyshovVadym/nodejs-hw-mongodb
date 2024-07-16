@@ -66,7 +66,7 @@ export const createContactController = async (req, res) => {
   let fileUrl;
 
   if (file) {
-    if (env('ENABLE_CLODINARY') === 'true') {
+    if (env('ENABLE_CLOUDINARY') === 'true') {
       fileUrl = await saveFileToCloudinary(file);
     } else {
       fileUrl = await saveFileToUploadDir(file);
@@ -156,7 +156,7 @@ export const patchContactController = async (req, res, next) => {
   const photo = req.file;
   let photoUrl;
   if (photo) {
-    if (env('ENABLE_CLODINARY') === 'true') {
+    if (env('ENABLE_CLOUDINARY') === 'true') {
       photoUrl = await saveFileToCloudinary(photo);
     } else {
       photoUrl = await saveFileToUploadDir(photo);
