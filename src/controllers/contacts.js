@@ -114,6 +114,36 @@ export const patchContactController = async (req, res, next) => {
 };
 
 // export const patchContactController = async (req, res, next) => {
+//   const { contactId } = req.params;
+//   const userId = req.user._id;
+//   const photo = req.file;
+
+//   let photoUrl;
+
+//   if (photo) {
+//     if (env('ENABLE_CLOUDINARY') === 'true') {
+//       photoUrl = await saveFileToCloudinary(photo);
+//     } else {
+//       photoUrl = await saveFileToUploadDir(photo);
+//     }
+//   }
+
+//   const result = await updateContact(
+//     contactId,
+//     { ...req.body, photo: photoUrl },
+//     userId,
+//   );
+//   if (!result) {
+//     return next(createHttpError(404, 'Contact not found'));
+//   }
+//   res.json({
+//     status: 200,
+//     message: 'Successfully patched a contact!',
+//     data: result.contact,
+//   });
+// };
+
+// export const patchContactController = async (req, res, next) => {
 //   const { user } = req;
 //   if (!user) {
 //     next(createHttpError(401));
