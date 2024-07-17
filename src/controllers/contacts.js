@@ -81,67 +81,67 @@ export const createContactController = async (req, res) => {
   });
 };
 
-export const patchContactController = async (req, res, next) => {
-  const { user } = req;
-  if (!user) {
-    next(createHttpError(401));
-    return;
-  }
-  const { contactId } = req.params;
-  const userId = req.user._id;
-  const file = req.file;
-
-  let fileUrl;
-
-  if (file) {
-    fileUrl = await saveFileToUploadDir(file);
-  }
-
-  const result = await updateContact(contactId, userId, {
-    ...req.body,
-    photo: fileUrl,
-  });
-
-  if (!result) {
-    next(createHttpError(404, 'Not found'));
-    return;
-  }
-  res.status(200).json({
-    status: 200,
-    message: 'Successfully patched a contact!',
-    data: result.contact,
-  });
-};
-
 // export const patchContactController = async (req, res, next) => {
+//   const { user } = req;
+//   if (!user) {
+//     next(createHttpError(401));
+//     return;
+//   }
 //   const { contactId } = req.params;
 //   const userId = req.user._id;
-//   const photo = req.file;
+//   const file = req.file;
 
-//   let photoUrl;
+//   let fileUrl;
 
-//   if (photo) {
-//     if (env('ENABLE_CLOUDINARY') === 'true') {
-//       photoUrl = await saveFileToCloudinary(photo);
-//     } else {
-//       photoUrl = await saveFileToUploadDir(photo);
-//     }
+//   if (file) {
+//     fileUrl = await saveFileToUploadDir(file);
 //   }
 
-//   const result = await updateContact(
-//     contactId,
-//     { ...req.body, photo: photoUrl },
-//     userId,
-//   );
+//   const result = await updateContact(contactId, userId, {
+//     ...req.body,
+//     photo: fileUrl,
+//   });
+
 //   if (!result) {
-//     return next(createHttpError(404, 'Contact not found'));
+//     next(createHttpError(404, 'Not found'));
+//     return;
 //   }
-//   res.json({
+//   res.status(200).json({
 //     status: 200,
 //     message: 'Successfully patched a contact!',
 //     data: result.contact,
 //   });
 // };
+
+export const patchContactController = async (req, res, next) => {
+  const { contactId } = req.params;
+  const userId = req.user._id;
+  const photo = req.file;
+
+  let photoUrl;
+
+  if (photo) {
+    if (env('ENABLE_CLOUDINARY') === 'true') {
+      photoUrl = await saveFileToCloudinary(photo);
+    } else {
+      photoUrl = await saveFileToUploadDir(photo);
+    }
+  }
+
+  const result = await updateContact(
+    contactId,
+    { ...req.body, photo: photoUrl },
+    userId,
+  );
+  if (!result) {
+    return next(createHttpError(404, 'Contact not found'));
+  }
+  res.json({
+    status: 200,
+    message: 'Successfully patched a contact!',
+    data: result.contact,
+  });
+};
 
 // export const patchContactController = async (req, res, next) => {
 //   const { user } = req;
