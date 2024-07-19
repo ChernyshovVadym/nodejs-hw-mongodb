@@ -3,6 +3,7 @@ import {
   deleteContact,
   getAllContacts,
   getContactById,
+  updateContact,
 } from '../services/contacts.js';
 
 import createHttpError from 'http-errors';
@@ -13,7 +14,6 @@ import { parseFilterParams } from '../utils/parseFilterParams.js';
 import { env } from '../utils/env.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
-import { Contact } from '../db/models/contact.js';
 
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
@@ -83,7 +83,6 @@ export const createContactController = async (req, res) => {
     data: contact,
   });
 };
-
 export const patchContactController = async (req, res, next) => {
   try {
     const { user } = req;
@@ -92,6 +91,7 @@ export const patchContactController = async (req, res, next) => {
     }
 
     const { contactId } = req.params;
+    const userId = user._id;
 
     const file = req.file;
     let fileUrl = null;
@@ -109,8 +109,7 @@ export const patchContactController = async (req, res, next) => {
       photo: fileUrl,
     };
 
-    const result = await Contact.findByIdAndUpdate(contactId, updateData, {
-      new: true,
+    const result = await updateContact(contactId, userId, updateData, {
       runValidators: true,
     });
 
@@ -121,7 +120,7 @@ export const patchContactController = async (req, res, next) => {
     res.json({
       status: 200,
       message: 'Successfully patched a contact!',
-      data: result,
+      data: result.contact,
     });
   } catch (error) {
     next(createHttpError(500, 'Something went wrong', { data: error.message }));
